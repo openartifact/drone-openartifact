@@ -49,4 +49,6 @@ LABEL org.opencontainers.image.title="drone-openartifact" \
       org.opencontainers.image.licenses="AGPL-3.0-or-later"
 COPY --from=oa /out/oa /usr/local/bin/oa
 COPY --from=builder /out/drone-openartifact /usr/local/bin/drone-openartifact
+# CI steps mount a root-owned workspace; see .trivyignore (DS-0002).
+USER 0:0
 ENTRYPOINT ["/usr/local/bin/drone-openartifact"]
