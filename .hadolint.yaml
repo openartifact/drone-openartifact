@@ -1,0 +1,7 @@
+# SPDX-FileCopyrightText: The OpenArtifact Authors
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+ignored:
+  # Alpine packages are not installed; the runtime image has no package manager.
+  - DL3018

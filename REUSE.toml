@@ -6,7 +6,7 @@ SPDX-PackageDownloadLocation = "https://github.com/openartifact/drone-openartifa
 # Files that cannot carry a comment header (lockfiles, the Woodpecker
 # plugin-index manifest whose YAML frontmatter must start at byte 0).
 [[annotations]]
-path = ["go.sum", "DOCS.md", "LICENSE"]
+path = ["go.mod", "go.sum", "DOCS.md", "LICENSE"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "The OpenArtifact Authors"
 SPDX-License-Identifier = "AGPL-3.0-or-later"
