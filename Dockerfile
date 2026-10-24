@@ -22,7 +22,7 @@ RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} \
 FROM --platform=$BUILDPLATFORM docker.io/library/golang:1.27.3-alpine@sha256:f2c872bcee949b7be9c490efd02b48a8a2fbf947cdf533f1c58525ec9d8170fd AS oa-release
 ARG TARGETARCH
 # Must be >= the plugin's minimum (MinOAVersion in plugin.go).
-ARG OA_VERSION=0.9.0
+ARG OA_VERSION=0.10.0
 WORKDIR /dl
 RUN set -eu; \
     f="oa_${OA_VERSION}_linux_${TARGETARCH}.tar.gz"; \
