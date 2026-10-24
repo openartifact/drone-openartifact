@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: The OpenArtifact Authors
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# The plugin runs as the CI step user (root in Woodpecker/Drone) so it can read
+# the workspace and write result_file into the root-owned workspace volume.
+# The image has no shell or package manager.
+DS-0002
