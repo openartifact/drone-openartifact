@@ -29,7 +29,8 @@ RUN set -eu; \
     base="https://github.com/openartifact/openartifact/releases/download/v${OA_VERSION}"; \
     wget -q "$base/$f"; \
     wget -q "$base/SHA256SUMS"; \
-    grep " $f\$" SHA256SUMS | sha256sum -c -; \
+    grep " $f\$" SHA256SUMS > "$f.sha256"; \
+    sha256sum -c "$f.sha256"; \
     tar -xzf "$f" oa; \
     install -D -m 0755 oa /out/oa
 
@@ -37,6 +38,7 @@ RUN set -eu; \
 FROM scratch AS oa-local
 COPY .oa-local/oa /out/oa
 
+# hadolint ignore=DL3006
 FROM oa-${OA_SOURCE} AS oa
 
 # ---- runtime ----------------------------------------------------------------
