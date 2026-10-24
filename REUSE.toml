@@ -1,0 +1,19 @@
+version = 1
+SPDX-PackageName = "drone-openartifact"
+SPDX-PackageSupplier = "The OpenArtifact Authors"
+SPDX-PackageDownloadLocation = "https://github.com/openartifact/drone-openartifact"
+
+# Files that cannot carry a comment header (lockfiles, the Woodpecker
+# plugin-index manifest whose YAML frontmatter must start at byte 0).
+[[annotations]]
+path = ["go.sum", "DOCS.md", "LICENSE"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "The OpenArtifact Authors"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# OpenArtifact mark, copied from github.com/openartifact/brand.
+[[annotations]]
+path = ["images/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "The OpenArtifact Authors"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
