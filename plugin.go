@@ -160,17 +160,26 @@ func (s Settings) Plan() ([]Step, error) {
 		create = appendOpt(create, "--pipeline", s.BundlePipeline)
 		add("bundle create", create...)
 
-		bundleAdd := []string{"bundle", "add", s.BundleName, s.BundleVersion}
 		if s.BuildName != "" && s.BuildNumber != "" {
-			bundleAdd = append(bundleAdd, "--from-build", s.BuildName+"/"+s.BuildNumber)
+			fromBuild := []string{
+				"bundle",
+				"add",
+				s.BundleName,
+				s.BundleVersion,
+				"--from-build",
+				s.BuildName + "/" + s.BuildNumber,
+			}
+			// Without --repo oa searches every readable hosted repository.
+			fromBuild = appendOpt(fromBuild, "--repo", s.Repo)
+			add("bundle add", fromBuild...)
 		}
 		if len(s.BundlePaths) > 0 {
-			bundleAdd = append(bundleAdd, "--repo", s.Repo)
+			byPath := []string{"bundle", "add", s.BundleName, s.BundleVersion, "--repo", s.Repo}
 			for _, p := range s.BundlePaths {
-				bundleAdd = append(bundleAdd, "--path", p)
+				byPath = append(byPath, "--path", p)
 			}
+			add("bundle add", byPath...)
 		}
-		add("bundle add", bundleAdd...)
 
 		seal := []string{"bundle", "seal", s.BundleName, s.BundleVersion}
 		seal = appendOpt(seal, "--gpg-key", s.GPGKey)

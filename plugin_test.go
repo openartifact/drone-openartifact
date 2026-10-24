@@ -75,7 +75,17 @@ func TestPlanUploadPromote(t *testing.T) {
 	)
 	assert.Equal(
 		t,
-		append(g, "bundle", "add", "app", "1.2.3", "--from-build", "acme/app/42"),
+		append(
+			g,
+			"bundle",
+			"add",
+			"app",
+			"1.2.3",
+			"--from-build",
+			"acme/app/42",
+			"--repo",
+			"releases",
+		),
 		steps[2].Args,
 	)
 	assert.Equal(t, append(g, "bundle", "seal", "app", "1.2.3", "--gpg-key", "ABCD"), steps[3].Args)

@@ -49,6 +49,7 @@ steps:
       files:
         - dist/*
       action: upload+promote   # upload, create+seal bundle, promote
+      bundle_pipeline: release # pipeline defining the prod stage
       stage: prod
       result_file: openartifact-result.json
 ```
@@ -85,6 +86,7 @@ steps:
       files:
         - dist/*
       action: upload+promote
+      bundle_pipeline: release
       stage: prod
 ```
 
@@ -117,8 +119,9 @@ docker run --rm -v "$PWD:/ws" -w /ws \
 go test ./...                     # unit tests (settings -> oa arguments, failure handling)
 golangci-lint run
 docker build -t drone-openartifact:dev .
-tests/smoke-fake.sh drone-openartifact:dev   # image + fake oa, no server needed
-tests/integration.sh drone-openartifact:dev  # image + real oa against a real server (see script header)
+tests/smoke-fake.sh drone-openartifact:dev       # image + fake oa, no server needed
+WOODPECKER_CLI=... tests/woodpecker-exec.sh drone-openartifact:dev   # image as a real Woodpecker step
+OA_BIN=... SERVER_BIN=... tests/integration.sh   # real oa + real server + Postgres (see script header)
 ```
 
 To test with an `oa` that is not released yet, put the binary at `.oa-local/oa` and build with `--build-arg OA_SOURCE=local`.

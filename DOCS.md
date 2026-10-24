@@ -82,8 +82,8 @@ Example configuration that uploads on a tag, seals a release bundle with everyth
       files:
         - dist/*.tar.gz
 +     action: upload+promote
++     bundle_pipeline: release
 +     stage: prod
-+     target_repo: releases-prod
 +     notes: Released by CI
 +     result_file: openartifact-result.json
 ```
@@ -164,7 +164,7 @@ bundle_description
 : release bundle description
 
 bundle_pipeline
-: promotion pipeline the bundle follows
+: name of the promotion pipeline the bundle follows. Promotion needs a pipeline that defines `stage` (and, unless the stage fixes a repository, `target_repo`)
 
 bundle_paths
 : additional paths inside `repo` to add to the bundle
