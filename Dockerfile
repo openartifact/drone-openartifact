@@ -7,7 +7,7 @@
 ARG OA_SOURCE=release
 
 # ---- plugin build -----------------------------------------------------------
-FROM --platform=$BUILDPLATFORM docker.io/library/golang:1.27.3-alpine@sha256:f2c872bcee949b7be9c490efd02b48a8a2fbf947cdf533f1c58525ec9d8170fd AS builder
+FROM --platform=$BUILDPLATFORM docker.io/library/golang:1.27.3-alpine@sha256:fa3d596898d9f126af7c01d14ee7597bab3f39cccf392ef36b69fe77cd681f18 AS builder
 ARG TARGETOS
 ARG TARGETARCH
 ARG VERSION=dev
@@ -19,7 +19,7 @@ RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} \
     go build -trimpath -ldflags "-s -w -X main.Version=${VERSION}" -o /out/drone-openartifact .
 
 # ---- oa from the official release, verified against SHA256SUMS --------------
-FROM --platform=$BUILDPLATFORM docker.io/library/golang:1.27.3-alpine@sha256:f2c872bcee949b7be9c490efd02b48a8a2fbf947cdf533f1c58525ec9d8170fd AS oa-release
+FROM --platform=$BUILDPLATFORM docker.io/library/golang:1.27.3-alpine@sha256:fa3d596898d9f126af7c01d14ee7597bab3f39cccf392ef36b69fe77cd681f18 AS oa-release
 ARG TARGETARCH
 # Must be >= the plugin's minimum (MinOAVersion in plugin.go).
 ARG OA_VERSION=0.10.0
